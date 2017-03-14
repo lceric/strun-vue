@@ -1,6 +1,6 @@
 // states
 const state = {
-  slidemenuState: true,
+  slidemenuState: false,
   breadpath: '首页',
   tabsleft: 0
 }
