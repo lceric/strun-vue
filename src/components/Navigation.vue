@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="st-fixed" >
     <mu-appbar title="strun" titleClass='st-title' :zDepth="1">
       <mu-icon-button icon='menu' @click="toggleLeftUserMenu" slot="left"/>
       
@@ -24,7 +24,7 @@
         <mu-menu-item title="作品" leftIcon="books" :size="36"/>
         <mu-divider shallowInset/>
         <mu-menu-item title="关于" leftIcon="link" :size="36"/>
-        <mu-menu-item @click="toggleLeftUserMenu" title="Close"/>
+        <!-- <mu-menu-item @click="toggleLeftUserMenu" title="Close"/> -->
       </mu-menu>
     </mu-drawer>
     <!-- 左侧栏 end -->
@@ -33,10 +33,10 @@
     <mu-popover :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
       <p class="user-name">{{'Hello!  ' + userName}}</p>
       <mu-menu :autoWidth="true" :width="300">
-        <mu-menu-item leftIconClass="user-icon" leftIcon="edit" title="我的文章"/>
+        <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
         <mu-menu-item  title="新增文章" leftIcon="edit" leftIconClass="user-icon"/>
         <mu-divider shallowInset/>
-        <mu-menu-item  leftIcon="edit" leftIconClass="user-icon"  title="退出" />
+        <mu-menu-item  leftIcon="power_settings_new" leftIconClass="user-icon"  title="退出" />
       </mu-menu>
     </mu-popover>
     <!-- 右侧栏 end -->
@@ -122,6 +122,20 @@
   }
 </script>
 <style lang="scss">
+  .mu-appbar {
+    background-color: #0097A7;
+    height: 56px;
+    padding: 0 8px;
+    width: 100%;
+    z-index: 100;
+  }
+  .st-fixed{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 88;
+  }
   .st-big-title,
   .st-title{
     text-transform: uppercase;
@@ -136,9 +150,11 @@
       line-height: 60px;
       font-size: 56px;
       margin-bottom: .3em;
+      color: #0097A7;
     }
     .st-big-disc{
       margin-top: 0;
+      color: #757575;
     }
   }
   .appbar-search-field{
@@ -175,13 +191,14 @@
       text-align: center;
       line-height: 30px;
       margin-bottom: 0;
+      color: #757575;
     }
     .mu-menu-destop{
       padding-top: 0;
       padding-bottom: 10px;
     }
     .user-icon{
-      color: rgb(3, 169, 244)
+      color: #0097A7
     }
     .user-text{
       padding-left: 36px;

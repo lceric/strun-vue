@@ -1,5 +1,5 @@
 <template>
-  <div class="main" :class="{'trans': active}">
+  <div class="main pd4" :class="{'trans': active}">
     <navigation></navigation> 
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
@@ -24,45 +24,44 @@
 </script>
 
 <style lang='scss'>
-  .component-fade-enter-active, 
-  .component-fade-leave-active,
-  .component-toggle-enter-active,
-  .component-toggle-leave-active {
-    transition: all .45s cubic-bezier(.23,1,.32,1);
-  }
-  .component-fade-enter, .component-fade-leave-active {
-    transform: rotateX(90deg);
-    opacity: 0;
-  }
-  .component-toggle-enter, .component-toggle-leave-active {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  .container-fluid {
-   /* margin-top: 20px;*/
-    padding-left: 0;
-    padding-right: 0;
-    /*background-color: #fff;*/
-  }
   .main{
     position: absolute;
+    top: 0;
     bottom: 0;
-    width: 100%;
+    right: 0;
+    left: 0;
+    width: auto;
+    overflow-y: auto;
     background: #e9e9e9;
-    height: 100%;
+
     &.trans{
       padding-left: 0;
+      .st-fixed{
+        left: 0px;
+      }
     }
   }
   @media screen and (min-width: 993px) {
     .main.trans{
       padding-left: 280px;
       transition: all .45s cubic-bezier(.23,1,.32,1);
-      /*transition: all .45s cubic-bezier(.23,1,.32,1);*/
+      .st-fixed{
+        left: 280px;
+        transition: all .45s cubic-bezier(.23,1,.32,1);
+      }
     }
     .mu-overlay{
       display: none;
     }
 
+  }
+  .pd3{
+    padding-top: 3rem;
+  }
+  .pd4{
+    padding-top: 4rem;
+  }
+  .pd5{
+    padding-top: 5rem;
   }
 </style>

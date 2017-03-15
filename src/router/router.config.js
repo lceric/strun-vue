@@ -11,12 +11,11 @@ const routers = [
   },
   {
     path: '/',
-    name: 'Home',
     component: resolve => require(['pages/Home'], resolve),
     children: [
       {
-        path: 'home',
-        component: resolve => require(['pages/Tabsmenutest'], resolve)
+        path: '*',
+        component: resolve => require(['pages/Index.vue'], resolve)
       }
     ]
   },
