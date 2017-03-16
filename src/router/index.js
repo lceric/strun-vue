@@ -12,7 +12,7 @@ const router = new Router({
 
 // 监听路由跳转前变化
 router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
+  if (to.path === '/login') {
     // 清除session
     sessionStorage.clear()
     // 加载条启动
@@ -22,13 +22,19 @@ router.beforeEach((to, from, next) => {
   } else {
     // console.log(JSON.parse(sessionStorage.getItem('user')).accessToken)
     if (!sessionStorage.getItem('user')) {
-      console.log(to.fullPath)
-      next({
-        path: '/',
-        query: {
-          redirect: to.fullPath
-        }
-      })
+      console.log(from)
+      // 发表文章需要登录
+      if (to.path === '/add') {
+        next({
+          path: '/',
+          query: {
+            redirect: from.fullPath
+          }
+        })
+      } else {
+        NProgress.start()
+        next()
+      }
     } else {
       NProgress.start()
       next()

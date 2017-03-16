@@ -83,10 +83,6 @@
 </script>
 
 <style lang='scss'>
-.cover-bg{
-  background: #00BCD4;
-  height: 30rem;
-}
 .st-card{
   min-height: 40rem;
   padding-bottom: 2rem;

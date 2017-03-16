@@ -1,5 +1,5 @@
 // states
-const state = JSON.parse(sessionStorage.getItem('user')) || {} // 用户登录状态
+const state = JSON.parse(localStorage.getItem('user')) || {login: false} // 用户登录状态
 
 // getters
 const getters = {
@@ -19,12 +19,12 @@ const actions = {
 // mutations
 const mutations = {
   USER_LOGIN (state, user) {
-    sessionStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('user', JSON.stringify(user))
     Object.assign(state, user)
   },
   USER_LOGINOUT (state) {
-    sessionStorage.removeItem('user')
-    state = {}
+    localStorage.removeItem('user')
+    state = {login: false}
     // Object.keys(state.user).forEach(k => Vue.delete(state, k))
   }
 }

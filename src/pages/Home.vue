@@ -4,6 +4,7 @@
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
+    <mu-float-button icon="add" secondary class="st-add-button"/>
   </div>
 </template>
 
@@ -32,7 +33,7 @@
     left: 0;
     width: auto;
     overflow-y: auto;
-    background: #e9e9e9;
+    background: #fff;
 
     &.trans{
       padding-left: 0;

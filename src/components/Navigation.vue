@@ -6,7 +6,12 @@
       <!-- <mu-text-field icon="search" class="appbar-search-field"  slot="left" hintText="请输入搜索内容"/> -->
       <div class="nav-user" slot="right">
         <div class="user-info">
-          <mu-avatar ref="userMenuBtn" @click="toggleUserMenu" class="user-pic" :src='userPic'/>
+          <div class="login-regist">
+            <router-link :to="{ name: 'sign', query: { signtype: 'login' }}">登录</router-link>
+            |
+            <router-link :to="{ name: 'sign', query: { signtype: 'regist' }}">注册</router-link>
+          </div>
+          <mu-avatar v-show="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" class="user-pic" :src='userPic'/>
         </div>
       </div>
     </mu-appbar>
@@ -30,7 +35,7 @@
     <!-- 左侧栏 end -->
 
     <!-- 右侧栏 start -->
-    <mu-popover :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
+    <mu-popover v-if="systemUser.login" :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
       <p class="user-name">{{'Hello!  ' + userName}}</p>
       <mu-menu :autoWidth="true" :width="300">
         <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
@@ -135,6 +140,14 @@
     right: 0;
     top: 0;
     z-index: 88;
+  }
+  .login-regist{
+    a{
+      color: #fff;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
   }
   .st-big-title,
   .st-title{

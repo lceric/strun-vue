@@ -2,7 +2,6 @@
   <div id="app" class="bg st-app"> 
     <!-- <img src="./assets/logo.png"> -->
     <router-view></router-view>
-    <mu-float-button icon="add" secondary class="st-add-button"/>
   </div>
 </template>
 
@@ -76,5 +75,9 @@
   .component-toggle-enter, .component-toggle-leave-active {
     transform: translateX(-100%);
     opacity: 0;
+  }
+  .cover-bg{
+    background: #00BCD4;
+    height: 30rem;
   }
 </style>

@@ -3,27 +3,30 @@
 // import Notfound from 'pages/Notfound'
 // import Vuextest from 'pages/Vuextest'
 
-const routers = [
-  {
-    path: '/Login',
-    name: 'Login',
-    component: resolve => require(['pages/Login'], resolve)
-  },
-  {
-    path: '/',
-    component: resolve => require(['pages/Home'], resolve),
-    children: [
-      {
-        path: '*',
-        component: resolve => require(['pages/Index.vue'], resolve)
-      }
-    ]
-  },
-  {
-    path: '*',
-    name: 'Notfound',
-    component: resolve => require(['pages/Notfound'], resolve)
-  }
-]
+const routers = [{
+  path: '/sign',
+  name: 'sign',
+  component: resolve => require(['pages/Sign'], resolve)
+  // children: [{
+  //   path: '/login',
+  //   name: 'login',
+  //   component: resolve => require(['pages/Login'], resolve)
+  // }, {
+  //   path: '/regist',
+  //   name: 'regist',
+  //   component: resolve => require(['pages/Regist'], resolve)
+  // }]
+}, {
+  path: '/',
+  component: resolve => require(['pages/Home'], resolve),
+  children: [{
+    path: '',
+    component: resolve => require(['pages/Index.vue'], resolve)
+  }]
+}, {
+  path: '*',
+  name: 'Notfound',
+  component: resolve => require(['pages/Notfound'], resolve)
+}]
 
 export default routers
