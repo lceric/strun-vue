@@ -16,7 +16,7 @@
   @import "scss/_container";
   @import "scss/_clearfix";
   body{
-    font-family: Roboto, Lato, sans-serif;
+    font-family: "Lucida Grande", "Microsoft JhengHei", "Microsoft YaHei";
     line-height: 1.5;
     font-size: 14px;
     font-weight: 400;
