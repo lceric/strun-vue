@@ -6,33 +6,16 @@
       <!-- <mu-text-field icon="search" class="appbar-search-field"  slot="left" hintText="请输入搜索内容"/> -->
       <div class="nav-user" slot="right">
         <div class="user-info">
-          <div class="login-regist">
+          <div class="login-regist" v-if="!systemUser.login">
             <router-link :to="{ name: 'sign', query: { signtype: 'login' }}">登录</router-link>
             |
             <router-link :to="{ name: 'sign', query: { signtype: 'regist' }}">注册</router-link>
           </div>
-          <mu-avatar v-show="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" class="user-pic" :src='userPic'/>
+          <mu-avatar v-if="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" class="user-pic" :src='userPic'/>
         </div>
       </div>
     </mu-appbar>
-    <!-- 左侧栏 start -->
-    <mu-drawer width="280" :docked="false" :open="leftShow" @close="toggleLeftUserMenu">
-      <div class="st-title-cont">
-        <h1 class="st-big-title" title="STRUN">
-          strun
-        </h1>
-        <p class="st-big-disc">技术无涯，永无止境</p>
-      </div>
-      <mu-menu :autoWidth="true"  width="200">
-        <mu-menu-item title="首页" leftIcon="home" :size="36"/>
-        <mu-menu-item title="文章" leftIcon="edit" :size="36"/>
-        <mu-menu-item title="作品" leftIcon="books" :size="36"/>
-        <mu-divider shallowInset/>
-        <mu-menu-item title="关于" leftIcon="link" :size="36"/>
-        <!-- <mu-menu-item @click="toggleLeftUserMenu" title="Close"/> -->
-      </mu-menu>
-    </mu-drawer>
-    <!-- 左侧栏 end -->
+    
 
     <!-- 右侧栏 start -->
     <mu-popover v-if="systemUser.login" :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
@@ -41,7 +24,7 @@
         <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
         <mu-menu-item  title="新增文章" leftIcon="edit" leftIconClass="user-icon"/>
         <mu-divider shallowInset/>
-        <mu-menu-item  leftIcon="power_settings_new" leftIconClass="user-icon"  title="退出" />
+        <mu-menu-item  leftIcon="power_settings_new" leftIconClass="user-icon"  title="退出" @click="singOut"/>
       </mu-menu>
     </mu-popover>
     <!-- 右侧栏 end -->
@@ -107,6 +90,12 @@
         this.show = !this.show
         // return this.show
       },
+      toggleUserMenu: function () {
+        this.show = !this.show
+      },
+      closeUserMenu: function () {
+        this.show = false
+      },
       toggleLeftUserMenu: function () {
         if (this.leftShow) {
           this.closeSlidemenu()
@@ -114,11 +103,9 @@
           this.openSlidemenu()
         }
       },
-      toggleUserMenu: function () {
-        this.show = !this.show
-      },
-      closeUserMenu: function () {
-        this.show = false
+      singOut: function () {
+        this.userloginout()
+        window.location.reload()
       }
     },
     mounted () {

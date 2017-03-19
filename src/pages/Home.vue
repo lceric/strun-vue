@@ -5,15 +5,18 @@
       <router-view></router-view>
     </transition>
     <mu-float-button icon="add" secondary class="st-add-button"/>
+    <sidemenu></sidemenu>
   </div>
 </template>
 
 <script>
   import navigation from 'components/Navigation.vue'
+  import sidemenu from 'components/Sidemenu.vue'
   import {mapState} from 'vuex'
   export default {
     components: {
-      navigation
+      navigation,
+      sidemenu
     },
     data () {
       return {}

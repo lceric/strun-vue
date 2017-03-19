@@ -16,7 +16,6 @@
   @import "scss/_container";
   @import "scss/_clearfix";
   body{
-    font-family: "Lucida Grande", "Microsoft JhengHei", "Microsoft YaHei";
     line-height: 1.5;
     font-size: 14px;
     font-weight: 400;
@@ -25,6 +24,7 @@
   }
   #app{
     overflow: hidden;
+    font-family: 'Microsoft JhengHei',"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   }
   #app,
   .main{

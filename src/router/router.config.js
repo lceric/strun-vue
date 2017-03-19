@@ -22,6 +22,9 @@ const routers = [{
   children: [{
     path: '',
     component: resolve => require(['pages/Index.vue'], resolve)
+  }, {
+    path: '/edit',
+    component: resolve => require(['pages/Edit.vue'], resolve)
   }]
 }, {
   path: '*',

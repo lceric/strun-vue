@@ -51,6 +51,7 @@
     <div class="login-helpers" v-if="substate">
       <mu-circular-progress :size="40"/>
       <!-- <el-button router type='text'>忘记密码?</el-button> -->
+      <div class="st-cover"></div>
     </div>
   </mu-paper>
 </template>
@@ -262,16 +263,22 @@
       }
     }
     .login-helpers {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #cccccc;
-      opacity: .6;
+      &,
+      .st-cover{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .st-cover{
+        background: #cccccc;
+        opacity: .3;
+      }
     }
     .login-info{
       position: absolute;
