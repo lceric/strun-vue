@@ -1,6 +1,6 @@
 <template>
   <div class="st-edit">
-    <div>
+    <!-- <div>
       <mu-icon-button @click="insertTitle" icon="title"/>
       <mu-icon-button icon="format_quote"/>
       <mu-icon-button icon="format_bold"/>
@@ -16,25 +16,61 @@
       <mu-flexbox-item>
         <vue-markdown :source="source"></vue-markdown>
       </mu-flexbox-item>
-    </mu-flexbox>
+    </mu-flexbox> -->
+    <textarea id="mainText"></textarea>
   </div>
 </template>
 
 <script>
-  import VueMarkdown from 'vue-markdown'
+  import SimpleMDE from 'simplemde'
+  // import VueMarkdown from 'vue-markdown'
   export default {
     data () {
       return {
-        source: ''
+        source: '',
+        sim: null
       }
     },
-    components: {
-      VueMarkdown
-    },
+    // components: {
+    //   VueMarkdown
+    // },
     methods: {
-      insertTitle () {
-        this.source = this.source + '# '
+      test () {
+        this.sim.value()
       }
+    },
+    mounted () {
+      this.sim = new SimpleMDE({
+        autofocus: true,
+        placeholder: '开始你的文章...',
+        element: document.getElementById('mainText'),
+        toolbar: [
+          'bold',
+          'italic',
+          'heading',
+          '|',
+          'quote',
+          'preview',
+          'link',
+          'image',
+          'side-by-side'],
+        toolbarTips: true
+      })
+      console.log(this.sim)
     }
   }
 </script>
+<style lang='scss'>
+  .st-edit{
+    .editor-toolbar.fullscreen{
+      z-index: 12;
+      top: 56px;
+    }
+    .CodeMirror-fullscreen{
+      top: 106px;
+    }
+    .editor-preview-active-side{
+      top: 106px;
+    }
+  }
+</style>

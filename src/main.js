@@ -7,11 +7,11 @@ import VueResource from 'vue-resource'
 import store from './store'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+import 'jquery'
 /* eslint-disable no-new */
 
 Vue.use(VueResource)
 Vue.use(MuseUI)
-
 global.host = 'http://192.168.25.102:803'
 global.authdata = ''
 

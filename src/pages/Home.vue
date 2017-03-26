@@ -1,5 +1,5 @@
 <template>
-  <div class="main pd4" :class="{'trans': active}">
+  <div class="main" :class="{'trans': active}">
     <navigation></navigation> 
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
@@ -37,7 +37,7 @@
     width: auto;
     overflow-y: auto;
     background: #fff;
-
+    padding-top: 56px;
     &.trans{
       padding-left: 0;
       .st-fixed{
