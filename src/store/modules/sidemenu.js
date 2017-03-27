@@ -2,14 +2,16 @@
 const state = {
   slidemenuState: false,
   breadpath: '首页',
-  tabsleft: 0
+  tabsleft: 0,
+  addBtnState: true
 }
 
 // getters
 const getters = {
   getSlidemenuState: state => state.slidemenuState,
   getBreadPath: state => state.breadpath,
-  getTabsLeft: state => state.tabsleft
+  getTabsLeft: state => state.tabsleft,
+  getAddBtnState: state => state.addBtnState
 }
 // mutations
 const mutations = {
@@ -27,6 +29,9 @@ const mutations = {
   },
   DECREAD_TABSLEFT (state, len) {
     state.tabsleft = state.tabsleft - len
+  },
+  UPDATE_ADDBTNSTATE (state, s) {
+    state.addBtnState = s
   }
 }
 // actions
@@ -45,6 +50,9 @@ const actions = {
   },
   decreadTabsleft ({commit, state}, len) {
     commit('DECREAD_TABSLEFT', len)
+  },
+  updateAddbtnstate ({commit, state}, s) {
+    commit('UPDATE_ADDBTNSTATE', s)
   }
 }
 export default {

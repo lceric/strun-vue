@@ -4,7 +4,7 @@
     <transition name="component-fade" mode="out-in">
       <router-view></router-view>
     </transition>
-    <mu-float-button icon="add" secondary class="st-add-button"/>
+    <mu-float-button v-if="addBtnState" @click="jumpEdit" icon="add" secondary class="st-add-button"/>
     <sidemenu></sidemenu>
   </div>
 </template>
@@ -22,8 +22,14 @@
       return {}
     },
     computed: mapState({
-      active: state => state.slidemenu.slidemenuState
-    })
+      active: state => state.slidemenu.slidemenuState,
+      addBtnState: state => state.slidemenu.addBtnState
+    }),
+    methods: {
+      jumpEdit: function () {
+        this.$router.push('/edit')
+      }
+    }
   }
 </script>
 

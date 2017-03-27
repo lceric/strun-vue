@@ -18,23 +18,31 @@
       </mu-flexbox-item>
     </mu-flexbox> -->
     <textarea id="mainText"></textarea>
+    <vue-markdown :source="source"></vue-markdown>
   </div>
 </template>
 
 <script>
   import SimpleMDE from 'simplemde'
-  // import VueMarkdown from 'vue-markdown'
+  import {mapActions} from 'vuex'
+  import VueMarkdown from 'vue-markdown'
   export default {
     data () {
       return {
-        source: '',
+        source: this.sim,
         sim: null
       }
     },
-    // components: {
-    //   VueMarkdown
-    // },
+    components: {
+      VueMarkdown
+    },
+    created () {
+      this.updateAddbtnstate(false)
+    },
     methods: {
+      ...mapActions([
+        'updateAddbtnstate'
+      ]),
       test () {
         this.sim.value()
       }
@@ -53,6 +61,7 @@
           'preview',
           'link',
           'image',
+          'fullscreen',
           'side-by-side'],
         toolbarTips: true
       })
