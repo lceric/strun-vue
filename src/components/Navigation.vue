@@ -109,7 +109,9 @@
       }
     },
     mounted () {
-      this.trigger = this.$refs.userMenuBtn.$el
+      if (JSON.parse(localStorage.getItem('user'))) {
+        this.trigger = this.$refs.userMenuBtn.$el
+      }
     }
   }
 </script>
