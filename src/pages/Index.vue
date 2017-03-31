@@ -72,11 +72,20 @@
 
 <script>
   import userPic from '../assets/person.png'
+  import {mapActions} from 'vuex'
   export default {
     data () {
       return {
         myron: userPic
       }
+    },
+    created () {
+      this.updateAddbtnstate(true)
+    },
+    methods: {
+      ...mapActions([
+        'updateAddbtnstate'
+      ])
     }
   }
 
