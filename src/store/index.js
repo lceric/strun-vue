@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import slidemenu from './modules/sidemenu'
 import user from './modules/user'
 import count from './modules/count'
+import article from './modules/article'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   modules: {
     slidemenu,
     user,
-    count
+    count,
+    article
   }
 })

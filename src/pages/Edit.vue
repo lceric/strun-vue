@@ -2,6 +2,7 @@
   <div class="st-edit">
     <textarea id="mainText"></textarea>
     <!-- <vue-markdown :source="source"></vue-markdown> -->
+    <mu-float-button icon="save" class="st-add-button save" @click="stSaveArticle"/>
   </div>
 </template>
 
@@ -26,8 +27,9 @@
       ...mapActions([
         'updateAddbtnstate'
       ]),
-      test () {
-        this.sim.value()
+      stSaveArticle () {
+        let article = this.sim.value()
+        console.log(article)
       }
     },
     mounted () {
@@ -63,6 +65,9 @@
     }
     .editor-preview-active-side{
       top: 106px;
+    }
+    .save{
+      z-index: 9;
     }
   }
 </style>

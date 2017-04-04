@@ -7,7 +7,7 @@ import VueResource from 'vue-resource'
 import store from './store'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
-import 'jquery'
+// import 'jquery'
 /* eslint-disable no-new */
 
 Vue.use(VueResource)

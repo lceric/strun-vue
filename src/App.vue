@@ -14,7 +14,12 @@
 <style lang="scss">
   // 引入scss文件
   @import "scss/_container";
+  @import "scss/_code.scss";
   @import "scss/_clearfix";
+  @import "scss/_page.scss";
+  html{
+    font-family: 'Microsoft JhengHei',"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  }
   body{
     line-height: 1.5;
     font-size: 14px;
@@ -24,7 +29,6 @@
   }
   #app{
     overflow: hidden;
-    font-family: 'Microsoft JhengHei',"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   }
   #app,
   .main{

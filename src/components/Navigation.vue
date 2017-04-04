@@ -22,7 +22,7 @@
       <p class="user-name">{{'Hello!  ' + userName}}</p>
       <mu-menu :autoWidth="true" :width="300">
         <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
-        <mu-menu-item  title="新增文章" leftIcon="edit" leftIconClass="user-icon"/>
+        <mu-menu-item title="新增文章" leftIcon="edit" leftIconClass="user-icon"/>
         <mu-divider shallowInset/>
         <mu-menu-item  leftIcon="power_settings_new" leftIconClass="user-icon"  title="退出" @click="singOut"/>
       </mu-menu>
