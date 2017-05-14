@@ -1,7 +1,9 @@
 <template>
   <mu-paper ref="ruleForm" class="st-form" :zDepth="1">
     <h2 class="bigintro">{{signType}}</h2>
-
+    <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">
+      {{signMessage}}
+    </mu-popup>
     <mu-text-field 
       class="center-block" 
       type="text" 
@@ -53,6 +55,7 @@
       <!-- <el-button router type='text'>忘记密码?</el-button> -->
       <div class="st-cover"></div>
     </div>
+    <!-- <button @click="test">测试</button> -->
   </mu-paper>
 </template>
  
@@ -60,11 +63,16 @@
   import 'scss/_code.scss'
   import {mapActions} from 'vuex'
   import {StringFormat, Format, Log} from 'utils'
+  import api from '../api'
+  import qs from 'qs'
+  import md5 from 'js-md5'
 
   export default {
     props: ['signType'],
     data () {
       return {
+        topPopup: false,
+        signMessage: '',
         state: false,
         codeString: '',
         usererror: '',
@@ -84,10 +92,19 @@
       ...mapActions([
         'userlogin'
       ]),
+      test () {
+        api.post('/User/login.php',
+          qs.stringify({
+            'loginname': 'steven',
+            'password': '1f3c71b227f1b77bc4355cb00adbc789'
+          }))
+        .then(function (data) {
+          console.log(data)
+        })
+      },
       userAvalide () {
         let re = /^[a-zA-z]\w{3,15}$/
         console.log(re.test(this.username))
-        // this.username !== 'admin'
         let flag = re.test(this.username)
         flag ? this.usererror = ''
         : this.usererror = '字母、数字、下划线组成，字母开头，4-16位'
@@ -105,9 +122,6 @@
         let vm = this
         console.log(this.inputcode.length)
         console.log(vm.$refs['codeinput'].$el.getElementsByTagName('input')[0].maxLength = '4')
-        // this.inputcode.length >= 4
-        // ? this.codestate = true
-        // : this.codestate = false
         let flag = this.inputcode === vm.codeString
         flag ? this.codeerror = ''
         : this.codeerror = '验证码输入错误'
@@ -115,71 +129,56 @@
       },
       submitForm (formName) {
         var vm = this
+        vm.topPopup = false
         console.log(vm.state)
         let vuser = this.userAvalide()
         let vpsw = this.passwordAvalide()
         let vcod = this.codeAvalide()
-        console.log('*******************************')
         console.log(vuser && vpsw && vcod)
         let valid = vuser && vpsw && vcod
-        // var resurl = 'http://192.168.25.102:80/api/users'
-        // var resurl = global.host + '/api/createusers'
-        var resurl = global.host + '/webapi/createusers'
-        console.log(vm.$refs[formName])
-        // vm.$refs[formName].validate((valid) => {
+        var resurl = global.host + '/User/login.php'
+        // console.log(vm.$refs[formName])
+        // var md5 = function (str) {
+        //   var cryptomd5 = crypto.createHash('md5')
+        //   cryptomd5.update(str, 'utf8')
+        //   return cryptomd5.digest('hex')
+        // }
+        // console.info(md5('lichao277'))
         if (valid) {
-        //     // alert('submit!')
-        //     // vm.$http.get(resurl)
           vm.substate = true
-          vm.ruleForm = {
-            username: vm.username
+          // vm.ruleForm = {
+          //   username: vm.username
+          // }
+          let params = {
+            'loginname': vm.username,
+            'password': md5(vm.password)
           }
-          vm.$http.post(resurl,
-            {
-              'username': vm.username,
-              'password': vm.password
+          console.info(params)
+          api.post(resurl, params)
+            .then(function (res) {
+              vm.topPopup = true
+              vm.signMessage = '登录成功!'
+              // console.log(res.data)
+              // global.authdata = res.userid
+              // sessionStorage.setItem('accessToken', global.authdata)
+              vm.userlogin(Object.assign(res.data, {
+                // 'accessToken': global.authdata,
+                'login': true
+              }))
+              // sessionStorage.setItem('stUser', JSON.stringify(res.data))
+              vm.$router.push({path: '/'})
             })
-            .then(function (data) {
-              console.log(data)
-              // if (data.body.code === 0) {
-              //   global.authdata = data.body.responseData
-              //   sessionStorage.setItem('accessToken', global.authdata)
-              //   vm.$router.push({path: '/home'})
-              // }
-              // 若在项目中使用，此处需做相应更改
-              console.log(data.body[0].id)
-              global.authdata = data.body[0].id
-              // sessionStorage.setItem('accessToken', global.authdata)
-              this.userlogin(Object.assign(vm.ruleForm, {
-                'accessToken': global.authdata,
-                'login': true
-              }))
-              vm.$router.push({path: '/'})
-            }, function (res) {
-              // 测试统一异常处理工具
-              try {
-                console.error('失败')
-                // throw new Exception('系统异常', '10001', vm)
-              } catch (error) {
-                console.log(error)
-                // console.log(error.name)
-                // console.log(error.message)
-                // console.log(error.code)
-              }
-              // console.log(res)
-              // 注：在此处做了假处理，为服务无法调通时能够进入系统中
-              // 正式环境不需要此处代码
-              global.authdata = '7758525'
-              // sessionStorage.setItem('accessToken', global.authdata)
-              this.userlogin(Object.assign(vm.ruleForm, {
-                'accessToken': global.authdata,
-                'login': true
-              }))
-              vm.$router.push({path: '/'})
+            .catch(error => {
+              console.info(error.response)
+              vm.substate = false
+              vm.signMessage = error.response.data.message
+              vm.topPopup = true
             })
         } else {
           // 测试日志工具
           Log('error submit!!')
+          vm.topPopup = true
+          vm.signMessage = 'error submit!!'
           // 测试字符串格式化工具
           let s = StringFormat('【{0}】{1}', '2013-15-11', 'adsfasdfddad')
           console.log(s)

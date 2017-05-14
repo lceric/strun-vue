@@ -12,12 +12,12 @@ import 'muse-ui/dist/muse-ui.css'
 
 Vue.use(VueResource)
 Vue.use(MuseUI)
-global.host = 'http://192.168.25.102:803'
+global.host = 'http://192.168.1.102/strunApi'
 global.authdata = ''
 
 // Vue.http.interceptors.push((request, next) => {
-//   request.headers.set('Authorization', global.authdata)
-//   request.headers.set('Content-Type', 'application/json;charset=UTF-8')
+//   // request.headers.set('Authorization', global.authdata)
+//   // request.headers.set('Content-Type', 'application/json;charset=UTF-8')
 //   next(response => {
 //     console.log(response.status)
 //     return response

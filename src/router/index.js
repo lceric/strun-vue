@@ -12,23 +12,23 @@ const router = new Router({
 
 // 监听路由跳转前变化
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
+  if (to.path === '/sign') {
     // 清除session
-    sessionStorage.clear()
+    localStorage.clear()
     // 加载条启动
     NProgress.start()
     // 路由跳转
     next()
   } else {
-    // console.log(JSON.parse(sessionStorage.getItem('user')).accessToken)
-    if (!sessionStorage.getItem('user')) {
-      console.log(from)
+    // console.log(JSON.parse(localStorage.getItem('user')).accessToken)
+    if (!localStorage.getItem('st-user')) {
+      // console.log(from)
       // 发表文章需要登录
-      if (to.path === '/add') {
+      if (to.path === '/edit') {
         next({
-          path: '/',
+          path: '/sign',
           query: {
-            redirect: from.fullPath
+            redirect: 'login'
           }
         })
       } else {

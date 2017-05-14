@@ -4,6 +4,7 @@
       <mu-icon-button icon='menu' @click="toggleLeftUserMenu" slot="left"/>
       
       <!-- <mu-text-field icon="search" class="appbar-search-field"  slot="left" hintText="请输入搜索内容"/> -->
+
       <div class="nav-user" slot="right">
         <div class="user-info">
           <div class="login-regist" v-if="!systemUser.login">
@@ -15,11 +16,10 @@
         </div>
       </div>
     </mu-appbar>
-    
 
     <!-- 右侧栏 start -->
-    <mu-popover v-if="systemUser.login" :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
-      <p class="user-name">{{'Hello!  ' + userName}}</p>
+    <mu-popover :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
+      <p class="user-name">{{'Hello!  ' + systemUser.username}}</p>
       <mu-menu :autoWidth="true" :width="300">
         <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
         <mu-menu-item title="新增文章" leftIcon="edit" leftIconClass="user-icon"/>
@@ -28,6 +28,7 @@
       </mu-menu>
     </mu-popover>
     <!-- 右侧栏 end -->
+    
   </div>
   
 </template>
