@@ -153,27 +153,30 @@
             'loginname': vm.username,
             'password': md5(vm.password)
           }
-          console.info(params)
-          api.post(resurl, params)
-            .then(function (res) {
-              vm.topPopup = true
-              vm.signMessage = '登录成功!'
-              // console.log(res.data)
-              // global.authdata = res.userid
-              // sessionStorage.setItem('accessToken', global.authdata)
-              vm.userlogin(Object.assign(res.data, {
-                // 'accessToken': global.authdata,
-                'login': true
-              }))
-              // sessionStorage.setItem('stUser', JSON.stringify(res.data))
-              vm.$router.push({path: '/'})
-            })
-            .catch(error => {
-              console.info(error.response)
-              vm.substate = false
-              vm.signMessage = error.response.data.message
-              vm.topPopup = true
-            })
+          // console.info(params)
+          if (vm.signType === 'login') {
+            // 登录方法
+            api.post(resurl, params)
+              .then(function (res) {
+                vm.topPopup = true
+                vm.signMessage = '登录成功!'
+                // console.log(res.data)
+                // global.authdata = res.userid
+                // sessionStorage.setItem('accessToken', global.authdata)
+                vm.userlogin(Object.assign(res.data, {
+                  // 'accessToken': global.authdata,
+                  'login': true
+                }))
+                // sessionStorage.setItem('stUser', JSON.stringify(res.data))
+                vm.$router.push({path: '/'})
+              })
+              .catch(error => {
+                console.info(error.response)
+                vm.substate = false
+                vm.signMessage = error.response.data.message
+                vm.topPopup = true
+              })
+          } else {}
         } else {
           // 测试日志工具
           Log('error submit!!')

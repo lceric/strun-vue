@@ -8,8 +8,8 @@
       <p class="st-big-disc">技术无涯，永无止境</p>
     </div>
     <mu-menu :autoWidth="true"  width="200">
-      <mu-menu-item title="首页" leftIcon="home" :size="36"/>
-      <mu-menu-item title="文章" leftIcon="edit" :size="36"/>
+      <mu-menu-item title="首页" to="/" leftIcon="home" :size="36"/>
+      <mu-menu-item title="文章" to="/articlelist" leftIcon="edit" :size="36"/>
       <mu-menu-item title="作品" leftIcon="books" :size="36"/>
       <mu-divider shallowInset/>
       <mu-menu-item title="关于" leftIcon="link" :size="36"/>

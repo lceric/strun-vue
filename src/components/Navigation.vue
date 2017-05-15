@@ -13,21 +13,21 @@
             <router-link :to="{ name: 'sign', query: { signtype: 'regist' }}">注册</router-link>
           </div>
           <mu-avatar v-if="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" class="user-pic" :src='userPic'/>
+          <!-- <mu-raised-button  v-if="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" ></mu-raised-button> -->
+          <!-- 右侧栏 start -->
+          <mu-popover :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
+            <p class="user-name">{{'Hello!  ' + systemUser.username}}</p>
+            <mu-menu :autoWidth="true" :width="300">
+              <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
+              <mu-menu-item title="新增文章" to="/edit" leftIcon="edit" leftIconClass="user-icon"/>
+              <mu-divider shallowInset/>
+              <mu-menu-item  leftIcon="power_settings_new" leftIconClass="user-icon"  title="退出" @click="singOut"/>
+            </mu-menu>
+          </mu-popover>
+          <!-- 右侧栏 end -->
         </div>
       </div>
     </mu-appbar>
-
-    <!-- 右侧栏 start -->
-    <mu-popover :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
-      <p class="user-name">{{'Hello!  ' + systemUser.username}}</p>
-      <mu-menu :autoWidth="true" :width="300">
-        <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
-        <mu-menu-item title="新增文章" leftIcon="edit" leftIconClass="user-icon"/>
-        <mu-divider shallowInset/>
-        <mu-menu-item  leftIcon="power_settings_new" leftIconClass="user-icon"  title="退出" @click="singOut"/>
-      </mu-menu>
-    </mu-popover>
-    <!-- 右侧栏 end -->
     
   </div>
   
@@ -110,9 +110,13 @@
       }
     },
     mounted () {
-      if (JSON.parse(localStorage.getItem('user'))) {
-        this.trigger = this.$refs.userMenuBtn.$el
+      // if (JSON.parse(localStorage.getItem('user'))) {
+      if (this.systemUser.login) {
+        this.$nextTick(function () {
+          this.trigger = this.$refs.userMenuBtn.$el
+        })
       }
+      // }
     }
   }
 </script>

@@ -1,9 +1,5 @@
 // article 状态管理
-const state = {
-  choose: {
-    id: ''
-  }
-}
+const state = JSON.parse(localStorage.getItem('st-article')) || {}
 
 const getters = {
   getArticle: state => state
@@ -17,7 +13,12 @@ const actions = {
 
 const mutations = {
   CHOOSE (state, id) {
+    console.info(id)
+    state = Object.assign({}, {choose: {'id': id}})
+    console.info(id)
     state.choose.id = id
+    // state.choose.id = id
+    localStorage.setItem('st-article', JSON.stringify({choose: {'id': id}}))
   }
 }
 
