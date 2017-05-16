@@ -63,7 +63,7 @@
       },
       getArticleList: function () {
         this.refreshing = true
-        api.post('/Article/findAll.php')
+        api.get('/Article/findAll.php')
         .then(res => {
           console.info(res.data)
           this.refreshing = false

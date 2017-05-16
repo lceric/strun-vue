@@ -13,7 +13,8 @@ import 'loaders.css'
 
 Vue.use(VueResource)
 Vue.use(MuseUI)
-global.host = 'http://192.168.25.116/strunApi'
+// global.host = 'http://192.168.25.116/strunApi'
+global.host = 'http://192.168.1.102/strunApi'
 global.authdata = ''
 
 // Vue.http.interceptors.push((request, next) => {

@@ -3,6 +3,7 @@ import qs from 'qs'
 const instance = axios.create({
   baseURL: global.host,
   headers: {
+    // 'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   },
   transformRequest: [function (data) {
