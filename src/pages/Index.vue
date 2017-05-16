@@ -2,22 +2,25 @@
   <div class="cover-bg divpt">
     <div class="st-card-container">
       <mu-card class="st-card">
-        <mu-card-header title="最新文章"  titleClass="st-card-title" subTitle="记录每一点" subTitleClass="st-card-sub-title">
-        </mu-card-header>
-        <mu-card-text class="pd0">
+        <!--<mu-card-header title="最新文章"  titleClass="st-card-title" subTitle="记录每一点" subTitleClass="st-card-sub-title">-->
+        <!--</mu-card-header>-->
+        <mu-card-text class="pd0 list-container">
+          <!--<mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh"/>-->
           <mu-list @itemClick="stArticleClick">
             <mu-sub-header>最新动态</mu-sub-header>
             <mu-divider/>
+            <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
             
-            <template v-for="art in articleList">
+            <!--<template v-for="art in articleList">
               <mu-list-item :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
                 <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
                 <span class="article-desc" slot="describe">
                   <span class="author">{{art.author}} -</span> {{art.articleintro}}
                 </span>
-              </mu-list-item>
               <mu-divider inset/>
-            </template>
+              </mu-list-item>
+            </template>-->
+            <articlelist :articleList="articleList"></articlelist>
           </mu-list>
         </mu-card-text>
         <div class="text-center">
@@ -34,12 +37,17 @@
   import userPic from '../assets/person.png'
   import {mapActions} from 'vuex'
   import api from '../api'
+  import articlelist from '../components/ArticleList.vue'
   export default {
     data () {
       return {
         myron: userPic,
-        articleList: []
+        articleList: [],
+        refreshing: false
       }
+    },
+    components: {
+      articlelist
     },
     created () {
       this.updateAddbtnstate(true)
@@ -52,14 +60,17 @@
       ]),
       stArticleClick: function (item) {
         // console.log(item.value)
-        // this.chooseArticle(item.value)
-        // this.$router.push('/article')
       },
       getArticleList: function () {
+        this.refreshing = true
         api.post('/Article/findAll.php')
         .then(res => {
           console.info(res.data)
+          this.refreshing = false
           this.articleList = res.data
+        })
+        .catch(() => {
+          this.refreshing = false
         })
       }
     }
@@ -85,6 +96,12 @@
       }
     }
   }
+}
+.list-container{
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #d9d9d9;
+  position: relative;
+  user-select: none;
 }
 .st-card-container{
   padding: 0 6rem;

@@ -4,6 +4,10 @@
     <mu-text-field hintText="最多不超过20个字符" v-model="title" :errorText="inputErrorText" @textOverflow="handleInputOverflow" fullWidth :maxLength="20"/><br/>
     <mavonEditor class="pdt15" style="height: 100%" v-model="source" :toolbars="toolbars"></mavonEditor>
     <mu-float-button icon="save" class="st-add-button save" @click="stSaveArticle"/>
+    <div class="st-loader-abs" v-if="saveState">
+      <div class="st-cover"></div>
+      <div class="loader st-loader"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+    </div>
   </div>
 </template>
 
@@ -19,6 +23,7 @@
         source: '',
         inputErrorText: '',
         title: '',
+        saveState: false,
         toolbars: {
           bold: true, // 粗体
           italic: true, // 斜体
@@ -69,9 +74,11 @@
         this.inputErrorText = isOverflow ? '超过啦！！！！' : ''
       },
       stSaveArticle () {
+        this.saveState = true
         let article = this.source
-        let articleintro = '你好'
+        let articleintro = 'php查询数据库转化json数据'
         let classify = 'PHP'
+        console.info(typeof article)
         api.post('/Article/insertArticle.php', {
           userid: this.userInfo.userid,
           title: this.title,
@@ -81,10 +88,15 @@
           classify: classify
         })
         .then(res => {
+          this.saveState = false
           console.info('保存成功！')
-          this.$router.push('/articlelist')
+          // this.$router.push('/articlelist')
         })
-        console.log(article)
+        .catch((er) => {
+          console.info(er.response)
+          this.saveState = false
+        })
+        // console.log(article)
       }
     }
   }

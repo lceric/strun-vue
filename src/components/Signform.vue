@@ -51,9 +51,8 @@
         @click="submitForm('ruleForm')"/>
     </div>
     <div class="login-helpers" v-if="substate">
-      <mu-circular-progress :size="40"/>
-      <!-- <el-button router type='text'>忘记密码?</el-button> -->
       <div class="st-cover"></div>
+      <div class="loader st-loader"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
     </div>
     <!-- <button @click="test">测试</button> -->
   </mu-paper>
@@ -270,16 +269,21 @@
       justify-content: center;
       align-items: center;
       &,
-      .st-cover{
+      .st-cover,
+      .loader{
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
+        z-index: 1;
       }
       .st-cover{
         background: #cccccc;
         opacity: .3;
+      }
+      .loader{
+        z-index: 8;
       }
     }
     .login-info{

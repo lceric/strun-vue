@@ -1,10 +1,11 @@
 <template>
   <div class=" ">
     <!-- <textarea id="mainText"></textarea> -->
-    <mu-list @itemClick="stArticleClick">
+    <mu-list>
       <mu-sub-header>文章列表</mu-sub-header>
       <mu-divider/>
-      <template v-for="art in articleList">
+      <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+      <!--<template v-for="art in articleList">
         <mu-list-item  :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
           <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
           <span class="article-desc" slot="describe">
@@ -12,7 +13,8 @@
           </span>
         </mu-list-item>
         <mu-divider inset/>
-      </template>
+      </template>-->
+      <articlelist :articleList="articleList"></articlelist>
     </mu-list>
   </div>
 </template>
@@ -20,12 +22,17 @@
 <script>
   import {mapActions} from 'vuex'
   import api from '../api'
+  import articlelist from '../components/ArticleList.vue'
   export default {
     data () {
       return {
         // myron: userPic
-        articleList: []
+        articleList: [],
+        refreshing: false
       }
+    },
+    components: {
+      articlelist
     },
     created () {
       this.updateAddbtnstate(true)
@@ -33,19 +40,18 @@
     },
     methods: {
       ...mapActions([
-        'updateAddbtnstate',
-        'chooseArticle'
+        'updateAddbtnstate'
       ]),
-      stArticleClick: function (item) {
-        console.log(item.value)
-        // this.chooseArticle(item.value)
-        // this.$router.push('/article')
-      },
       getArticleList: function () {
+        this.refreshing = true
         api.post('/Article/findAll.php')
         .then(res => {
           console.info(res.data)
+          this.refreshing = false
           this.articleList = res.data
+        })
+        .catch(() => {
+          this.refreshing = false
         })
       }
     }

@@ -1,0 +1,40 @@
+.st-loader{
+  margin: 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.loader{
+    height: 300px;
+    .line-scale{
+      &>div{
+        background: #ff4081;
+      }
+    }
+    
+  }
+}
+
+.st-loader-abs {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &,
+  .st-cover,
+  .loader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+  }
+  .st-cover{
+    background: #111;
+    opacity: .3;
+  }
+  .loader{
+    height: 100%;
+    z-index: 8;
+  }
+}

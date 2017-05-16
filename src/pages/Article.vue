@@ -1,6 +1,8 @@
 <template>
   <div class="st-edit container">
     <!-- <textarea id="mainText"></textarea> -->
+    <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+            
     <h1>{{article.title}}</h1>
     <vue-markdown :source="article.content"></vue-markdown>
     <!-- <mavonEditor v-model="article.content" :subfield="false"></mavonEditor> -->
@@ -16,7 +18,8 @@
     data () {
       return {
         source: '你好',
-        article: ''
+        article: '',
+        refreshing: false
       }
     },
     components: {
@@ -38,14 +41,19 @@
       getArticle: function () {
         // console.info(this.articleid)
         let vm = this
+        vm.refreshing = true
         let p = window.location.hash.split('?')[1]
         let articleid = p.split('=')[1]
         api.post('/Article/findByArticleId.php', {
           'articleid': articleid
         })
         .then(res => {
+          vm.refreshing = false
           console.info(res.data)
           vm.article = res.data
+        })
+        .catch(() => {
+          vm.refreshing = false
         })
       }
     }
