@@ -89,8 +89,8 @@
         })
         .then(res => {
           this.saveState = false
-          console.info('保存成功！')
-          // this.$router.push('/articlelist')
+          // console.info('保存成功！')
+          this.$router.push('/articlelist')
         })
         .catch((er) => {
           console.info(er.response)
