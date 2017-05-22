@@ -49,7 +49,7 @@
         })
         .then(res => {
           vm.refreshing = false
-          console.info(res.data)
+          // console.info(res.data)
           vm.article = res.data
         })
         .catch(() => {
