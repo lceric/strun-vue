@@ -75,11 +75,13 @@
         'openSlidemenu'
       ]),
       handleCommand: function (command) {
+        let vm = this
         // this.$message('click' + command)
         if (command === 'quit') {
-          this.$message('退出')
+          // this.$message('退出')
           this.userloginout()
-          this.$router.replace({path: '/'})
+          this.$router.push('/')
+          vm.$toast('退出成功！', 'top', 3600)
         }
       },
       togslide: function () {

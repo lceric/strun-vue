@@ -19,7 +19,7 @@
     },
     created () {
       let p = window.location.hash.split('?')[1]
-      console.log(p.split('=')[1])
+      // console.log(p.split('=')[1])
       this.signType = p.split('=')[1]
     },
     methods: {

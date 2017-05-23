@@ -1,13 +1,14 @@
 <template>
   <div class="st-edit pdlr15 pdt15">
     <!-- <vue-markdown :source="source"></vue-markdown> -->
-    <mu-text-field hintText="最多不超过20个字符" v-model="title" :errorText="inputErrorText" @textOverflow="handleInputOverflow" fullWidth :maxLength="20"/><br/>
+    <mu-text-field hintText="请输入标题" v-model="title" :errorText="inputErrorText" @textOverflow="handleInputOverflow" fullWidth :maxLength="56"/><br/>
     <mavonEditor class="pdt15" style="height: 100%" v-model="source" :toolbars="toolbars"></mavonEditor>
     <mu-float-button icon="save" class="st-add-button save" @click="stSaveArticle"/>
-    <div class="st-loader-abs" v-if="saveState">
+    <!-- <div class="st-loader-abs" v-if="saveState">
       <div class="st-cover"></div>
       <div class="loader st-loader"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
-    </div>
+    </div> -->
+    <articleDialog v-if="dialogState" :loadState="saveState" :articleSource="source" @cancel="cancel" @submitForm="stSubmitArticle"></articleDialog>
   </div>
 </template>
 
@@ -17,6 +18,7 @@
   import { mavonEditor } from 'mavon-editor'
   import 'mavon-editor/dist/css/index.css'
   import api from '../api'
+  import articleDialog from '../components/SubmitArticle.vue'
   export default {
     data () {
       return {
@@ -24,6 +26,7 @@
         inputErrorText: '',
         title: '',
         saveState: false,
+        dialogState: false,
         toolbars: {
           bold: true, // 粗体
           italic: true, // 斜体
@@ -56,7 +59,8 @@
       }
     },
     components: {
-      mavonEditor
+      mavonEditor,
+      articleDialog
     },
     computed: {
       ...mapState({
@@ -71,32 +75,51 @@
         'updateAddbtnstate'
       ]),
       handleInputOverflow: function (isOverflow) {
-        this.inputErrorText = isOverflow ? '超过啦！！！！' : ''
+        this.inputErrorText = isOverflow ? '标题太长！！' : ''
       },
       stSaveArticle () {
-        this.saveState = true
-        let article = this.source
-        let articleintro = 'php查询数据库转化json数据'
-        let classify = 'PHP'
-        console.info(typeof article)
-        api.post('/Article/insertArticle.php', {
-          userid: this.userInfo.userid,
-          title: this.title,
-          author: this.userInfo.penname,
-          articleintro: articleintro,
-          content: article,
-          classify: classify
-        })
-        .then(res => {
-          this.saveState = false
-          // console.info('保存成功！')
-          this.$router.push('/articlelist')
-        })
-        .catch((er) => {
-          console.info(er.response)
-          this.saveState = false
-        })
-        // console.log(article)
+        let vm = this
+        vm.dialogState = true
+      },
+      cancel () {
+        this.dialogState = false
+        this.saveState = false
+      },
+      stSubmitArticle (params) {
+        let vm = this
+        vm.saveState = true
+        let article = vm.source
+        if (vm.title.trim() !== '' && vm.title !== null) {
+          if (vm.source.trim() !== '' && vm.source !== null) {
+            let postParams = Object.assign({
+              userid: vm.userInfo.userid,
+              title: vm.title,
+              author: vm.userInfo.penname,
+              content: article
+            }, params)
+            api.post('/Article/insertArticle.php', postParams)
+            .then(res => {
+              vm.saveState = false
+              // console.info('保存成功！')
+              vm.$toast('保存成功！', 'top', 3600)
+              vm.$router.push('/articlelist')
+            })
+            .catch((er) => {
+              // console.info(er.response)
+              vm.$toast(er.response.data.message, 'top', 3600)
+              vm.saveState = false
+            })
+          } else {
+            // console.info('内容不能为空')
+            vm.$toast('内容不能为空', 'top', 3600)
+            vm.saveState = false
+          }
+          // console.log(article)
+        } else {
+          // console.info('标题不能为空')
+          vm.$toast('标题不能为空', 'top', 3600)
+          vm.saveState = false
+        }
       }
     }
   }

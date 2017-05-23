@@ -8,7 +8,7 @@ const instance = axios.create({
   },
   transformRequest: [function (data) {
     /* 做任何你想要的数据转换 */
-    console.info(data)
+    // console.info(data)
     return qs.stringify(data)
   }]
 })

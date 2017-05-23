@@ -65,7 +65,7 @@
         this.refreshing = true
         api.get('/Article/findAll.php')
         .then(res => {
-          console.info(res.data)
+          // console.info(res.data)
           this.refreshing = false
           this.articleList = res.data
         })

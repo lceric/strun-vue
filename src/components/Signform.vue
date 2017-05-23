@@ -1,9 +1,9 @@
 <template>
   <mu-paper ref="ruleForm" class="st-form" :zDepth="1">
     <h2 class="bigintro">{{signType}}</h2>
-    <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">
+    <!-- <mu-popup position="top" :overlay="false" popupClass="demo-popup-top" :open="topPopup">
       {{signMessage}}
-    </mu-popup>
+    </mu-popup> -->
     <mu-text-field 
       class="center-block" 
       type="text" 
@@ -61,7 +61,7 @@
 <script>
   import 'scss/_code.scss'
   import {mapActions} from 'vuex'
-  import {StringFormat, Format, Log} from 'utils'
+  // import {StringFormat, Format, Log} from 'utils'
   import api from '../api'
   import qs from 'qs'
   import md5 from 'js-md5'
@@ -103,7 +103,7 @@
       },
       userAvalide () {
         let re = /^[a-zA-z]\w{3,15}$/
-        console.log(re.test(this.username))
+        // console.log(re.test(this.username))
         let flag = re.test(this.username)
         flag ? this.usererror = ''
         : this.usererror = '字母、数字、下划线组成，字母开头，4-16位'
@@ -111,7 +111,7 @@
       },
       passwordAvalide () {
         let re = /^\s*$/
-        console.log(re.test(this.password))
+        // console.log(re.test(this.password))
         let flag = !re.test(this.password) && this.password.length >= 6
         flag ? this.pswerror = ''
         : this.pswerror = '密码开头不能为空格，至少6位'
@@ -119,8 +119,8 @@
       },
       codeAvalide () {
         let vm = this
-        console.log(this.inputcode.length)
-        console.log(vm.$refs['codeinput'].$el.getElementsByTagName('input')[0].maxLength = '4')
+        // console.log(this.inputcode.length)
+        // console.log(vm.$refs['codeinput'].$el.getElementsByTagName('input')[0].maxLength = '4')
         let flag = this.inputcode === vm.codeString
         flag ? this.codeerror = ''
         : this.codeerror = '验证码输入错误'
@@ -129,11 +129,11 @@
       submitForm (formName) {
         var vm = this
         vm.topPopup = false
-        console.log(vm.state)
+        // console.log(vm.state)
         let vuser = this.userAvalide()
         let vpsw = this.passwordAvalide()
         let vcod = this.codeAvalide()
-        console.log(vuser && vpsw && vcod)
+        // console.log(vuser && vpsw && vcod)
         let valid = vuser && vpsw && vcod
         var resurl = global.host + '/User/login.php'
         // console.log(vm.$refs[formName])
@@ -168,25 +168,28 @@
                 }))
                 // sessionStorage.setItem('stUser', JSON.stringify(res.data))
                 vm.$router.push({path: '/'})
+                vm.$toast('登录成功！', 'top', 3600)
               })
               .catch(error => {
                 console.info(error.response)
                 vm.substate = false
                 vm.signMessage = error.response.data.message
+                vm.$toast(error.response.data.message, 'top', 3600)
                 vm.topPopup = true
               })
           } else {}
         } else {
           // 测试日志工具
-          Log('error submit!!')
+          vm.$toast('表单校验不通过！', 'top', 3600)
+          // Log('error submit!!')
           vm.topPopup = true
           vm.signMessage = 'error submit!!'
           // 测试字符串格式化工具
-          let s = StringFormat('【{0}】{1}', '2013-15-11', 'adsfasdfddad')
-          console.log(s)
+          // let s = StringFormat('【{0}】{1}', '2013-15-11', 'adsfasdfddad')
+          // console.log(s)
           // 测试日期格式化工具
-          let d = Format(new Date(), 'yyyy-MM-dd hh:mm:ss')
-          console.log(d)
+          // let d = Format(new Date(), 'yyyy-MM-dd hh:mm:ss')
+          // console.log(d)
           vm.state = true
           return false
         }
