@@ -17,7 +17,7 @@ Vue.use(VueResource)
 Vue.use(MuseUI)
 // global.host = 'http://192.168.25.116/strunApi'
 global.host = '../strunApi'
-// global.host = 'http://192.168.1.100/strunApi'
+// global.host = 'http://192.168.1.101/strunApi'
 global.authdata = ''
 
 // Vue.http.interceptors.push((request, next) => {
@@ -34,5 +34,5 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: {App}
+  components: { App }
 })

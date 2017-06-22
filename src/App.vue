@@ -14,10 +14,9 @@
 <style lang="scss">
   /* 引入scss文件 */
   @import "scss/index.scss";
-  html{
+  html,body{
+    height: 100%;
     font-family: 'Microsoft JhengHei',"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-  }
-  body{
     line-height: 1.5;
     font-size: 14px;
     font-weight: 400;

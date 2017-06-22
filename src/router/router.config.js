@@ -26,6 +26,9 @@ const routers = [{
     path: '/edit',
     component: resolve => require(['pages/Edit.vue'], resolve)
   }, {
+    path: '/redit',
+    component: resolve => require(['pages/Edit.vue'], resolve)
+  }, {
     path: '/article',
     name: 'article',
     component: resolve => require(['pages/Article'], resolve)

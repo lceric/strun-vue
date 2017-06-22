@@ -1,22 +1,22 @@
 <template>
-  <div class=" ">
-    <!-- <textarea id="mainText"></textarea> -->
-    <mu-list>
-      <mu-sub-header>文章列表</mu-sub-header>
-      <mu-divider/>
-      <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
-      <!--<template v-for="art in articleList">
-        <mu-list-item  :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
-          <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
-          <span class="article-desc" slot="describe">
-            <span class="author">{{art.author}} -</span> {{art.articleintro}}
-          </span>
-        </mu-list-item>
-        <mu-divider inset/>
-      </template>-->
-      <articlelist :articleList="articleList"></articlelist>
-    </mu-list>
-  </div>
+  <!-- <textarea id="mainText"></textarea> -->
+  <mu-list>
+    <mu-sub-header>文章列表</mu-sub-header>
+    <mu-divider/>
+    <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+    <!--<template v-for="art in articleList">
+      <mu-list-item  :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
+        <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
+        <span class="article-desc" slot="describe">
+          <span class="author">{{art.author}} -</span> {{art.articleintro}}
+        </span>
+      </mu-list-item>
+      <mu-divider inset/>
+    </template>-->
+    <template v-for="art in articleList">
+      <articlelist :art="art"></articlelist>
+    </template>
+  </mu-list>
 </template>
 
 <script>
@@ -58,5 +58,9 @@
   }
 
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
+  .mu-list,
+  .article-list-cont{
+    height: 100%;
+  }
 </style>

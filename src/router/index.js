@@ -24,7 +24,7 @@ router.beforeEach((to, from, next) => {
     if (!localStorage.getItem('st-user')) {
       // console.log(from)
       // 发表文章需要登录
-      if (to.path === '/edit') {
+      if (to.path === '/edit' || to.path === '/redit') {
         next({
           path: '/sign',
           query: {

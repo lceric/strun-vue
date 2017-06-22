@@ -19,7 +19,18 @@
   import 'mavon-editor/dist/css/index.css'
   import api from '../api'
   import articleDialog from '../components/SubmitArticle.vue'
+  var fromPage = ''
+  var queryId = ''
   export default {
+    beforeRouteEnter (to, from, next) {
+      // 在渲染该组件的对应路由被 confirm 前调用
+      // 不！能！获取组件实例 `this`
+      // 因为当钩子执行前，组件实例还没被创建
+      // console.info(to)
+      fromPage = to.path
+      queryId = to.query.articleid
+      next()
+    },
     data () {
       return {
         source: '',
@@ -68,6 +79,10 @@
       })
     },
     created () {
+      // console.info(fromPage)
+      if (fromPage === '/redit') {
+        this.getArticle(queryId)
+      }
       this.updateAddbtnstate(false)
     },
     methods: {
@@ -85,27 +100,63 @@
         this.dialogState = false
         this.saveState = false
       },
+      getArticle: function (articleid) {
+        // console.info(this.articleid)
+        let vm = this
+        vm.refreshing = true
+        api.post('/Article/findByArticleId.php', {
+          'articleid': articleid
+        })
+        .then(res => {
+          vm.refreshing = false
+          // console.info(res.data)
+          vm.source = res.data.content
+          vm.title = res.data.title
+        })
+        .catch(() => {
+          vm.refreshing = false
+        })
+      },
       stSubmitArticle (params) {
         let vm = this
         vm.saveState = true
         let article = vm.source
         if (vm.title.trim() !== '' && vm.title !== null) {
           if (vm.source.trim() !== '' && vm.source !== null) {
-            let postParams = Object.assign({
-              userid: vm.userInfo.userid,
-              title: vm.title,
-              author: vm.userInfo.penname,
-              content: article
-            }, params)
-            api.post('/Article/insertArticle.php', postParams)
+            let postParams
+            let subApi
+            if (fromPage === '/redit') {
+              postParams = Object.assign({
+                articleid: queryId,
+                userid: vm.userInfo.userid,
+                title: vm.title,
+                author: vm.userInfo.penname,
+                content: article
+              }, params)
+              subApi = api.post('/Article/updateArticle.php', postParams)
+            } else {
+              postParams = Object.assign({
+                userid: vm.userInfo.userid,
+                title: vm.title,
+                author: vm.userInfo.penname,
+                content: article
+              }, params)
+              subApi = api.post('/Article/insertArticle.php', postParams)
+            }
+            subApi
             .then(res => {
               vm.saveState = false
               // console.info('保存成功！')
-              vm.$toast('保存成功！', 'top', 3600)
               vm.$router.push('/articlelist')
+              if (fromPage === '/redit') {
+                vm.$toast('修改成功！', 'top', 3600)
+                return
+              }
+              vm.$toast('保存成功！', 'top', 3600)
             })
             .catch((er) => {
               // console.info(er.response)
+              console.info(er.response)
               vm.$toast(er.response.data.message, 'top', 3600)
               vm.saveState = false
             })
@@ -124,7 +175,7 @@
     }
   }
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
   .st-edit{
     height: 100%;
     .editor-toolbar.fullscreen{

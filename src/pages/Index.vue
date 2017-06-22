@@ -1,35 +1,35 @@
 <template>
-  <div class="cover-bg divpt">
-    <div class="st-card-container">
-      <mu-card class="st-card">
-        <!--<mu-card-header title="最新文章"  titleClass="st-card-title" subTitle="记录每一点" subTitleClass="st-card-sub-title">-->
-        <!--</mu-card-header>-->
-        <mu-card-text class="pd0 list-container">
-          <!--<mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh"/>-->
-          <mu-list @itemClick="stArticleClick">
-            <mu-sub-header>最新动态</mu-sub-header>
-            <mu-divider/>
-            <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
-            
-            <!--<template v-for="art in articleList">
-              <mu-list-item :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
-                <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
-                <span class="article-desc" slot="describe">
-                  <span class="author">{{art.author}} -</span> {{art.articleintro}}
-                </span>
-              <mu-divider inset/>
-              </mu-list-item>
-            </template>-->
-            <articlelist :articleList="articleList"></articlelist>
-          </mu-list>
-        </mu-card-text>
-        <div class="text-center">
-          <mu-raised-button to="/articlelist" label="查看往期" class="demo-raised-button" primary/>
-        </div>
-      </mu-card>
-
+  <div class="st-card-container">
+    <div class="st-card">
+      <!--<mu-card-header title="最新文章"  titleClass="st-card-title" subTitle="记录每一点" subTitleClass="st-card-sub-title">-->
+      <!--</mu-card-header>-->
+      <div class="pd0 list-container">
+        <!--<mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh"/>-->
+        <mu-list @itemClick="stArticleClick">
+          <mu-sub-header>最新动态</mu-sub-header>
+          <mu-divider/>
+          <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+          
+          <!--<template v-for="art in articleList">
+            <mu-list-item :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
+              <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
+              <span class="article-desc" slot="describe">
+                <span class="author">{{art.author}} -</span> {{art.articleintro}}
+              </span>
+            <mu-divider inset/>
+            </mu-list-item>
+          </template>-->
+          <template v-for="art in articleList">
+            <articlelist :art="art"></articlelist>
+          </template>
+          <!--<articlelist :articleList="articleList"></articlelist>-->
+        </mu-list>
+      </div>
+      <div class="text-center">
+        <mu-raised-button to="/articlelist" label="查看往期" class="demo-raised-button" primary/>
+      </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -99,12 +99,14 @@
 }
 .list-container{
   -webkit-overflow-scrolling: touch;
-  border: 1px solid #d9d9d9;
+  // border: 1px solid #d9d9d9;
   position: relative;
   user-select: none;
 }
 .st-card-container{
-  padding: 0 6rem;
+  height: 100%;
+  margin-top: 20px;
+  padding: 0 18px;
 }
 .article-title{
   font-size: 18px;

@@ -6,6 +6,7 @@
     <h1>{{article.title}}</h1>
     <vue-markdown :source="article.content"></vue-markdown>
     <!-- <mavonEditor v-model="article.content" :subfield="false"></mavonEditor> -->
+    <mu-float-button icon="edit" class="st-add-button redit" @click="stReEditArticle"/>
   </div>
 </template>
 
@@ -19,7 +20,8 @@
       return {
         source: '你好',
         article: '',
-        refreshing: false
+        refreshing: false,
+        articleId: ''
       }
     },
     components: {
@@ -38,12 +40,23 @@
       test () {
         this.sim.value()
       },
+      stReEditArticle () {
+        let vm = this
+        // console.info('编辑' + vm.articleId)
+        vm.$router.push({
+          path: '/redit',
+          query: {
+            articleid: vm.articleId
+          }
+        })
+      },
       getArticle: function () {
         // console.info(this.articleid)
         let vm = this
         vm.refreshing = true
         let p = window.location.hash.split('?')[1]
         let articleid = p.split('=')[1]
+        vm.articleId = articleid
         api.post('/Article/findByArticleId.php', {
           'articleid': articleid
         })
@@ -59,7 +72,7 @@
     }
   }
 </script>
-<style lang='scss'>
+<style lang='scss' scoped>
   .st-edit{
     .editor-toolbar.fullscreen{
       z-index: 12;
@@ -70,6 +83,9 @@
     }
     .editor-preview-active-side{
       top: 106px;
+    }
+    .redit{
+      bottom: 8rem;
     }
   }
 </style>
