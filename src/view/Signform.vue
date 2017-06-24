@@ -52,7 +52,8 @@
     </div>
     <div class="login-helpers" v-if="substate">
       <div class="st-cover"></div>
-      <div class="loader st-loader"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+      <st-loader></st-loader>
+      <!--<div class="loader st-loader"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>-->
     </div>
     <!-- <button @click="test">测试</button> -->
   </mu-paper>

@@ -8,8 +8,7 @@
         <mu-list @itemClick="stArticleClick">
           <mu-sub-header>最新动态</mu-sub-header>
           <mu-divider/>
-          <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
-          
+          <st-loader v-if="refreshing"></st-loader>
           <!--<template v-for="art in articleList">
             <mu-list-item :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
               <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
@@ -26,7 +25,7 @@
         </mu-list>
       </div>
       <div class="text-center">
-        <mu-raised-button to="/articlelist" label="查看往期" class="demo-raised-button" primary/>
+        <mu-raised-button to="/articlelist" label="查看往期" class="demo-raised-button st-btn" primary/>
       </div>
     </div>
 
@@ -37,7 +36,7 @@
   import userPic from '../assets/person.png'
   import {mapActions} from 'vuex'
   import api from '../api'
-  import articlelist from '../components/ArticleList.vue'
+  import articlelist from '../view/ArticleList.vue'
   export default {
     data () {
       return {
@@ -62,15 +61,18 @@
         // console.log(item.value)
       },
       getArticleList: function () {
-        this.refreshing = true
+        let vm = this
+        vm.refreshing = true
         api.get('/Article/findAll.php')
         .then(res => {
           // console.info(res.data)
-          this.refreshing = false
-          this.articleList = res.data
+          vm.refreshing = false
+          vm.articleList = res.data
         })
-        .catch(() => {
-          this.refreshing = false
+        .catch((e) => {
+          // console.info(e.response)
+          vm.$toast(e.response.data.message, 'top', 3600)
+          vm.refreshing = false
         })
       }
     }

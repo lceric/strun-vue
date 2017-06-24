@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import signform from '../components/Signform'
+  import signform from '../view/Signform'
   export default {
     data () {
       return {

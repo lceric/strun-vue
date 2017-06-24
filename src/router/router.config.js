@@ -36,6 +36,10 @@ const routers = [{
     path: '/articlelist',
     name: 'articlelist',
     component: resolve => require(['pages/Articlelist'], resolve)
+  }, {
+    path: '/about',
+    name: 'about',
+    component: resolve => require(['pages/About'], resolve)
   }]
 }, {
   path: '*',

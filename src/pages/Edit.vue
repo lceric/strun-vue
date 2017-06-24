@@ -18,7 +18,7 @@
   import { mavonEditor } from 'mavon-editor'
   import 'mavon-editor/dist/css/index.css'
   import api from '../api'
-  import articleDialog from '../components/SubmitArticle.vue'
+  import articleDialog from '../view/SubmitArticle.vue'
   var fromPage = ''
   var queryId = ''
   export default {
@@ -113,7 +113,8 @@
           vm.source = res.data.content
           vm.title = res.data.title
         })
-        .catch(() => {
+        .catch((e) => {
+          vm.$toast(e.response.data.message, 'top', 3600)
           vm.refreshing = false
         })
       },
@@ -156,7 +157,7 @@
             })
             .catch((er) => {
               // console.info(er.response)
-              console.info(er.response)
+              // console.info(er.response)
               vm.$toast(er.response.data.message, 'top', 3600)
               vm.saveState = false
             })

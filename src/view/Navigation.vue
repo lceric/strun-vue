@@ -1,7 +1,7 @@
 <template>
   <div class="st-fixed" >
     <mu-appbar title="strun" titleClass='st-title' :zDepth="1">
-      <mu-icon-button icon='menu' @click="toggleLeftUserMenu" slot="left"/>
+      <mu-icon-button class="st-title-icon" icon='menu' @click="toggleLeftUserMenu" slot="left"/>
       
       <!-- <mu-text-field icon="search" class="appbar-search-field"  slot="left" hintText="请输入搜索内容"/> -->
 
@@ -122,98 +122,3 @@
     }
   }
 </script>
-<style lang="scss">
-  .mu-appbar {
-    background-color: #0097A7;
-    height: 56px;
-    padding: 0 8px;
-    width: 100%;
-    z-index: 100;
-  }
-  .st-fixed{
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 88;
-  }
-  .login-regist{
-    a{
-      color: #fff;
-      &:hover{
-        text-decoration: underline;
-      }
-    }
-  }
-  .st-big-title,
-  .st-title{
-    text-transform: uppercase;
-  }
-  .st-title-cont{
-
-    height: 120px;
-    text-align: center;
-    color: rgba(0,0,0,0.54);
-    background: url(../assets/light-wool.png);
-    .st-big-title{
-      line-height: 60px;
-      font-size: 56px;
-      margin-bottom: .3em;
-      color: #0097A7;
-    }
-    .st-big-disc{
-      margin-top: 0;
-      color: #757575;
-    }
-  }
-  .appbar-search-field{
-    color: #FFF;
-    margin-bottom: 0;
-    &.focus-state {
-      color: #FFF;
-    }
-    .mu-text-field-hint {
-      color: fade-out(#FFF, .54);
-    }
-    .mu-text-field-input {
-      color: #FFF;
-    }
-    .mu-text-field-focus-line {
-      background-color: #FFF;
-    }
-  }
-  .nav-user{
-    .user-info{
-      position: relative;
-      cursor: pointer;
-      .user-pic{
-        width: 47px;
-        height: 47px;
-        border-radius: 50%;
-        vertical-align: middle;
-      }
-    }
-  }
-  .user-menu{
-    // width: 300px;
-    .user-name{
-      text-align: center;
-      line-height: 30px;
-      margin-bottom: 0;
-      color: #757575;
-    }
-    .mu-menu-destop{
-      padding-top: 0;
-      padding-bottom: 10px;
-    }
-    .user-icon{
-      color: #0097A7
-    }
-    .user-text{
-      padding-left: 36px;
-    }
-  }
-  .mu-menu-item.have-left-icon{
-    padding-left: 48px;
-  }
-</style>

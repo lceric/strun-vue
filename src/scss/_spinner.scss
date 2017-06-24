@@ -10,7 +10,24 @@
         background: #ff4081;
       }
     }
-    
+    .pacman {
+      &> div:first-of-type {
+        border-top: 25px solid #ff4081;
+        border-left: 25px solid #ff4081;
+        border-bottom: 25px solid #ff4081;
+      }
+      & > div:nth-child(2) {
+        border-top: 25px solid #ff4081;
+        border-left: 25px solid #ff4081;
+        border-bottom: 25px solid #ff4081;
+      }
+      & > div:nth-child(3),
+      & > div:nth-child(4), 
+      & > div:nth-child(5), 
+      & > div:nth-child(6) {
+        background-color: #ff4081;
+      }
+    }
   }
 }
 

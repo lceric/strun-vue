@@ -1,7 +1,7 @@
 <template>
 	<div class="nfound">
-		<h1> 404找不到</h1>
-		<el-button @click="back" type="ghost">返回</el-button>
+		<h1><img src="../assets/404.svg" alt="404"></h1>
+		<a @click="back" type="ghost">返回</a>
 	</div>
 </template>
 

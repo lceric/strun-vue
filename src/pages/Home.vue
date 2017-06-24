@@ -10,8 +10,8 @@
 </template>
 
 <script>
-  import navigation from 'components/Navigation.vue'
-  import sidemenu from 'components/Sidemenu.vue'
+  import navigation from 'view/Navigation.vue'
+  import sidemenu from 'view/Sidemenu.vue'
   import {mapState} from 'vuex'
   export default {
     components: {

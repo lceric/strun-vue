@@ -3,7 +3,8 @@
   <mu-list>
     <mu-sub-header>文章列表</mu-sub-header>
     <mu-divider/>
-    <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
+    <!--<div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>-->
+    <st-loader v-if="refreshing"></st-loader>
     <!--<template v-for="art in articleList">
       <mu-list-item  :to="{ name: 'article', query: { articleid: art.articleid }}" :title="art.title" :value="art.articleid">
         <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
@@ -22,7 +23,7 @@
 <script>
   import {mapActions} from 'vuex'
   import api from '../api'
-  import articlelist from '../components/ArticleList.vue'
+  import articlelist from '../view/ArticleList.vue'
   export default {
     data () {
       return {
@@ -43,15 +44,17 @@
         'updateAddbtnstate'
       ]),
       getArticleList: function () {
-        this.refreshing = true
+        let vm = this
+        vm.refreshing = true
         api.post('/Article/findAll.php')
         .then(res => {
           // console.info(res.data)
-          this.refreshing = false
-          this.articleList = res.data
+          vm.refreshing = false
+          vm.articleList = res.data
         })
-        .catch(() => {
-          this.refreshing = false
+        .catch((e) => {
+          vm.$toast(e.response.data.message, 'top', 3600)
+          vm.refreshing = false
         })
       }
     }

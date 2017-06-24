@@ -3,21 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueResource from 'vue-resource'
 import store from './store'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import 'loaders.css'
 import Toast from './lib/toast.js'
+import './components/index.js'
 Vue.use(Toast)
 // import 'jquery'
 /* eslint-disable no-new */
 
-Vue.use(VueResource)
 Vue.use(MuseUI)
 // global.host = 'http://192.168.25.116/strunApi'
-global.host = '../strunApi'
-// global.host = 'http://192.168.1.101/strunApi'
+// global.host = '../strunApi'
+global.host = 'http://192.168.1.101/strunApi'
 global.authdata = ''
 
 // Vue.http.interceptors.push((request, next) => {

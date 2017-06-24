@@ -1,0 +1,40 @@
+$themeBgColor: #fff;
+$themColor: #7e57c2;
+$themColor: #ff5252;
+$themColor: rgba(0, 0, 0, 0.87);
+$themBtnColor: #fff;
+// 导航
+.main{
+  // 导航条背景
+  .mu-appbar {
+      background-color: $themeBgColor;
+  }
+  // 导航条上的文字标题
+  .st-title,
+  // 导航条上的切换图标
+  .st-title-icon .mu-icon,
+  // 导航条上登录注册
+  .login-regist a,
+  // 左侧收缩栏标题
+  .st-title-cont .st-big-title,
+  .st-title-cont .st-big-disc{
+    color: $themColor;
+  }
+
+  // button
+  .st-btn{
+    background: $themColor;
+    color: $themBtnColor;
+  }
+  // 文章列表
+  .st-article-item{
+    .article-item-avatar{
+      background: lighten($themColor, 16%);
+      color: $themBtnColor;
+    }
+  }
+  .mu-step-label.active .mu-step-label-circle,
+  .mu-step-label.completed .mu-step-label-circle {
+    background-color: $themColor;
+  }
+}

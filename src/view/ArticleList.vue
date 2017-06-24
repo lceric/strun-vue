@@ -1,11 +1,11 @@
 <template>
     <!--<div class="loader st-loader" v-if="refreshing"><div class="ball-scale-multiple"><div></div><div></div><div></div></div></div>-->
-  <mu-list-item tag="div" 
+  <mu-list-item class="st-article-item" tag="div" 
   :to="{ name: 'article', query: { articleid: art.articleid }}" 
   :title="art.title" 
   :describeLine="1"
   :value="art.articleid">
-    <mu-avatar slot="leftAvatar">{{art.classify}}</mu-avatar>
+    <mu-avatar class="article-item-avatar" slot="leftAvatar">{{art.classify}}</mu-avatar>
     <span class="article-desc" slot="describe">
       <span class="author">{{art.author}} -</span> {{art.articleintro}}
     </span>

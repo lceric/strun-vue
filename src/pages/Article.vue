@@ -1,12 +1,13 @@
 <template>
   <div class="st-edit container">
     <!-- <textarea id="mainText"></textarea> -->
-    <div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>
-            
+    <!--<div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>-->
+
+    <st-loader v-if="refreshing"></st-loader>
     <h1>{{article.title}}</h1>
     <vue-markdown :source="article.content"></vue-markdown>
     <!-- <mavonEditor v-model="article.content" :subfield="false"></mavonEditor> -->
-    <mu-float-button icon="edit" class="st-add-button redit" @click="stReEditArticle"/>
+    <mu-float-button icon="edit" class="st-redit-button redit" @click="stReEditArticle"/>
   </div>
 </template>
 
@@ -86,6 +87,10 @@
     }
     .redit{
       bottom: 8rem;
+    }
+    .st-redit-button{
+      position: fixed;
+      right: 2rem;
     }
   }
 </style>
