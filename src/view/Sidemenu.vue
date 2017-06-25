@@ -9,12 +9,13 @@
     </div>
     <mu-menu :autoWidth="true"  width="200">
       <mu-menu-item title="首页" to="/" leftIcon="home" :size="36"/>
-      <mu-menu-item title="文章" to="/articlelist" leftIcon="edit" :size="36"/>
+      <!--<mu-menu-item title="文章" to="/articlelist" leftIcon="edit" :size="36"/>-->
       <mu-menu-item title="作品" leftIcon="books" :size="36"/>
       <mu-divider shallowInset/>
-      <mu-menu-item title="关于" to="/about" leftIcon="link" :size="36"/>
+      <mu-menu-item title="更新日志" to="/about" leftIcon="link" :size="36"/>
       <!-- <mu-menu-item @click="toggleLeftUserMenu" title="Close"/> -->
     </mu-menu>
+    <p class="st-copyright">©2017 设计人生. 保留所有权利<br/>陕ICP备17000202号</p>
   </mu-drawer>
   <!-- 左侧栏 end -->
 </template>

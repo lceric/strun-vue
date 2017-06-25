@@ -6,10 +6,12 @@ import StringFormat from './stringformat.js'
 import Format from './format.js'
 // 打印日志
 import Log from './log.js'
-
+// 节流函数
+import Throttle from './throttle.js'
 export {
   Exception,
   StringFormat,
   Format,
-  Log
+  Log,
+  Throttle
 }

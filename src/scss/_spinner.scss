@@ -30,16 +30,24 @@
     }
   }
 }
-
-.st-loader-abs {
+.st-loader-wrapper{
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  &,
+  &.abs{
+    position: absolute;
+  }
+  &.fix{
+    position: fixed;
+  }
   .st-cover,
   .loader{
     position: absolute;
+  }
+  &,
+  .st-cover,
+  .loader{
     top: 0;
     left: 0;
     right: 0;

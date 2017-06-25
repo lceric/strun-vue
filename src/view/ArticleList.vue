@@ -9,7 +9,6 @@
     <span class="article-desc" slot="describe">
       <span class="author">{{art.author}} -</span> {{art.articleintro}}
     </span>
-    <mu-divider inset/>
   </mu-list-item>
 </template>
 
@@ -34,31 +33,5 @@
   }
 
 </script>
-<style lang='scss'>
-.mu-item-wrapper{
-  .mu-item{
-    &.show-left{
-      padding-left: 72px;
-    }
-    &.show-left {
-      padding-left: 72px;
-    }
-    &.has-avatar {
-      min-height: 56px !important;
-      .mu-avatar{
-        font-size: 12px;
-      }
-    }
-    .article-desc{
-      // white-space: nowrap;
-      // text-overflow: ellipsis;
-      // overflow: hidden;
-      // width: 100%;
-      display: block;
-    }
-    .mu-divider{
-      margin-top: 6px;
-    }
-  }
-} 
+<style lang='scss' scoped>
 </style>

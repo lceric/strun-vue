@@ -148,7 +148,7 @@
             .then(res => {
               vm.saveState = false
               // console.info('保存成功！')
-              vm.$router.push('/articlelist')
+              vm.$router.push('/')
               if (fromPage === '/redit') {
                 vm.$toast('修改成功！', 'top', 3600)
                 return

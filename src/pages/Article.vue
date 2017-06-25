@@ -3,7 +3,11 @@
     <!-- <textarea id="mainText"></textarea> -->
     <!--<div class="loader st-loader" v-if="refreshing"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>-->
 
-    <st-loader v-if="refreshing"></st-loader>
+    <!--<st-loader v-if="refreshing"></st-loader>-->
+    <div class="st-loader-wrapper fix" v-if="refreshing">
+      <div class="st-cover"></div>
+      <st-loader ></st-loader>
+    </div>
     <h1>{{article.title}}</h1>
     <vue-markdown :source="article.content"></vue-markdown>
     <!-- <mavonEditor v-model="article.content" :subfield="false"></mavonEditor> -->

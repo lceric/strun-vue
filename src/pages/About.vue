@@ -8,7 +8,10 @@
       <div class="loader-inner pacman"><div></div><div></div><div></div><div></div><div></div></div>
     </div>-->
 
-    <st-loader v-if="refreshing"></st-loader>
+    <div class="st-loader-wrapper fix" v-if="refreshing">
+      <div class="st-cover"></div>
+      <st-loader ></st-loader>
+    </div>
     <mu-stepper class="about-page" orientation="vertical">
       <mu-step v-for="item in gitHubCommitList">
         <mu-step-label>

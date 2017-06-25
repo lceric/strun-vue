@@ -13,10 +13,13 @@
     </div>
     <mu-flat-button slot="actions" @click="cancel" primary label="取消"/>
     <mu-flat-button slot="actions" primary @click="submitAriticle" label="确定"/>
-    <div class="st-loader-abs" v-if="loading">
+    <!--<div class="st-loader-wrapper abs" v-if="loading">
       <div class="st-cover"></div>
       <st-loader ></st-loader>
-      <!--<div class="loader st-loader"><div class="line-scale"><div></div><div></div><div></div><div></div><div></div></div></div>-->
+    </div>-->
+    <div class="st-loader-wrapper fix" v-if="loading">
+      <div class="st-cover"></div>
+      <st-loader ></st-loader>
     </div>
   </mu-dialog>
 </template>

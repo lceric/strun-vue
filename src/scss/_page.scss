@@ -99,7 +99,7 @@
     padding-bottom: 10px;
   }
   .user-icon{
-    color: #0097A7
+    // color: #0097A7
   }
   .user-text{
     padding-left: 36px;
@@ -154,6 +154,39 @@
       }
     }
     
+  }
+}
+// 文章列表
+.st-article-item{
+  border-bottom: 1px solid #fbf4f4;
+  .mu-item{
+    &.show-left{
+      padding-left: 72px;
+    }
+    &.show-left {
+      padding-left: 72px;
+    }
+    &.has-avatar {
+      min-height: 56px !important;
+      .mu-avatar{
+        font-size: 12px;
+      }
+    }
+    .article-desc{
+      display: block;
+    }
+    .mu-divider{
+      margin-top: 6px;
+    }
+  }
+}
+.st-loadmore{
+  .mu-icon-button{
+    width: 84px;
+    height: 84px;
+  }
+  .loadmore-btn{
+    font-size: 60px;
   }
 }
 // 关于页面

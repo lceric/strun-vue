@@ -33,9 +33,9 @@ const routers = [{
     name: 'article',
     component: resolve => require(['pages/Article'], resolve)
   }, {
-    path: '/articlelist',
-    name: 'articlelist',
-    component: resolve => require(['pages/Articlelist'], resolve)
+    path: '/myarticlelist',
+    name: 'myarticlelist',
+    component: resolve => require(['pages/MyArticleList'], resolve)
   }, {
     path: '/about',
     name: 'about',

@@ -1,6 +1,9 @@
+// 主题背景色
 $themeBgColor: #fff;
-$themColor: #7e57c2;
-$themColor: #ff5252;
+// 点缀色
+$adornColor: #ff4081;
+// 主题前景色
+// $themColor: #7e57c2;
 $themColor: rgba(0, 0, 0, 0.87);
 $themBtnColor: #fff;
 // 导航
@@ -37,4 +40,35 @@ $themBtnColor: #fff;
   .mu-step-label.completed .mu-step-label-circle {
     background-color: $themColor;
   }
+  // muse 
+  .mu-switch input[type="checkbox"]:checked + .mu-switch-wrapper .mu-switch-track {
+    background-color: $adornColor;
+  }
+  .mu-switch input[type="checkbox"]:checked + .mu-switch-wrapper .mu-switch-thumb {
+    background-color: lighten($adornColor, 10%);
+    color: lighten($adornColor, 10%);
+  }
+}
+// 右侧用户信息图标
+.user-menu .user-icon {
+  color: $adornColor;
+}
+.nprogress-busy{
+  #nprogress{
+    .bar{
+      background: $adornColor;
+    }
+    .spinner{
+      display: none;
+      .spinner-icon{
+        border-top-color: $adornColor;
+        border-left-color: $adornColor;
+      }
+    }
+  }
+}
+// 备案信息
+.st-copyright{
+  color: #aaa;
+  text-align: center;
 }

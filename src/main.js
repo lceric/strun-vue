@@ -15,18 +15,9 @@ Vue.use(Toast)
 
 Vue.use(MuseUI)
 // global.host = 'http://192.168.25.116/strunApi'
-// global.host = '../strunApi'
-global.host = 'http://192.168.1.101/strunApi'
+global.host = '../strunApi'
+// global.host = 'http://192.168.1.101/strunApi'
 global.authdata = ''
-
-// Vue.http.interceptors.push((request, next) => {
-//   // request.headers.set('Authorization', global.authdata)
-//   // request.headers.set('Content-Type', 'application/json;charset=UTF-8')
-//   next(response => {
-//     console.log(response.status)
-//     return response
-//   })
-// })
 
 new Vue({
   el: '#app',

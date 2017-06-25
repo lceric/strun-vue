@@ -12,13 +12,15 @@
             |
             <router-link :to="{ name: 'sign', query: { signtype: 'regist' }}">注册</router-link>
           </div>
-          <mu-avatar v-if="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" class="user-pic" :src='userPic'/>
+          <mu-chip v-if="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" backgroundColor="transparent">
+            <mu-icon value="perm_identity" color="red"/>Hello! {{systemUser.username}}
+          </mu-chip>
           <!-- <mu-raised-button  v-if="systemUser.login" ref="userMenuBtn" @click="toggleUserMenu" ></mu-raised-button> -->
           <!-- 右侧栏 start -->
-          <mu-popover :trigger="trigger" popoverClass="user-menu" :open="show" @close="closeUserMenu">
-            <p class="user-name">{{'Hello!  ' + systemUser.username}}</p>
+          <mu-popover :trigger="trigger" popoverClass="user-menu mt20" :open="show" @close="closeUserMenu">
+            <!--<p class="user-name">{{'Hello!  ' + systemUser.username}}</p>-->
             <mu-menu :autoWidth="true" :width="300">
-              <mu-menu-item leftIconClass="user-icon" leftIcon="description" title="我的文章"/>
+              <mu-menu-item leftIconClass="user-icon" to="/myarticlelist" leftIcon="description" title="我的文章"/>
               <mu-menu-item title="新增文章" to="/edit" leftIcon="edit" leftIconClass="user-icon"/>
               <mu-divider shallowInset/>
               <mu-menu-item  leftIcon="power_settings_new" leftIconClass="user-icon"  title="退出" @click="singOut"/>
